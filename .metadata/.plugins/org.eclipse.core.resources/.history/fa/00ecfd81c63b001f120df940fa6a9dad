@@ -1,0 +1,21 @@
+package com.in28minutes.rest.webservices.restful_web_services.user;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class UserDaoService {
+	//JPA/Hiberante Database
+	//UserDaoService talks to static list
+	private static List<User> users = new ArrayList<>();
+	static {
+		users.add(new User(1, "Anusha", LocalDateTime.now().minusYears(30)));
+		users.add(new User(1, "Bhanu", LocalDateTime.now().minusYears(25)));
+		users.add(new User(1, "Ramya", LocalDateTime.now().minusYears(20)));
+		
+	}
+	
+}

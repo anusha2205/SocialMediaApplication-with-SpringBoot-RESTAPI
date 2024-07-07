@@ -1,0 +1,38 @@
+package com.in28minutes.rest.webservices.restful_web_services.user;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController //REST API
+public class UserResource {
+	private UserDaoService service;
+	public UserResource(UserDaoService service) {
+		this.service = service;
+	}
+	//GET /users
+	@GetMapping("/users")
+	public List<User> RetriveAllUsers(){
+		return service.findAll();
+		
+	}
+	//GET /users/{user}
+	@GetMapping("/users/{id}")
+	public User RetriveUser(@PathVariable int id){
+		return service.findUser(id);
+		
+	}
+	//Post
+	@PostMapping("/users")
+	public ResponseEntity<User> CreateUser(@RequestBody User user) {
+		service.SaveUser(user);
+		
+		return ResponseEntity.created(null).build();
+	}
+}
